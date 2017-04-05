@@ -43,7 +43,7 @@ do
 	raxmlHPC-PTHREADS -m GTRGAMMA -c 4 -s ${a} -n $(basename ${a}) -T 10 -p $RANDOM -b $RANDOM -# 100
 	mv RAxML_bootstrap.$(basename ${a}) true_${n}/$(basename $a)_raxml_sbs_trees.nw
 	rm -f RAxML_*$(basename ${a})
-	gotree compute support classical -i true_${n}/$(basename $a)_raxml_best.nw -b true_${n}/$(basename $a)_raxml_sbs.nw -o true_${n}/$(basename $a)_raxml_sbs_supports.nw -t 10
+	gotree compute support classical -i true_${n}/$(basename $a)_raxml_best.nw -b true_${n}/$(basename $a)_raxml_sbs_trees.nw -o true_${n}/$(basename $a)_raxml_sbs_supports.nw -t 10
 	
 	# UltraFast Bootstrap with iqtree
 	iqtree-omp -s ${a} -m GTR+G -bb 1000 -nt AUTO > true_${n}/$(basename $a)_iqtree.nw
@@ -59,7 +59,7 @@ do
 	     gotree compare edges -i ${a}_raxml_rbs_supports.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_rbs.txt
 	     gotree compare edges -i ${a}_raxml_sbs_supports.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_sbs.txt
 	     gotree compare edges -i ${a}_alrt.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_alrt.txt
-	     gotree compare edges -i ${a}_raxml_iqtree.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_iqtree.txt
-	     paste comp_rbs.txt comp_sbs.txt comp_alrt.txt comp_iqtree.txt | awk '{print $1 $3 $5 $7 $8}' >> comp.txt
+	     gotree compare edges -i ${a}_iqtree.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_iqtree.txt
+	     paste comp_rbs.txt comp_sbs.txt comp_alrt.txt comp_iqtree.txt | awk '{print $1 " " $3 " " $5 " " $7 " " $8}' >> comp.txt
     do
 done
