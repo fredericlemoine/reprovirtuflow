@@ -52,6 +52,7 @@ do
     done
 done
 
+# We compare branch supports with presence/absence in the true tree
 for n in {100,200,500}
 do
     for a in `ls true_${n}/true_${n}_*.ph`
@@ -61,5 +62,5 @@ do
 	     gotree compare edges -i ${a}_alrt.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_alrt.txt
 	     gotree compare edges -i ${a}_iqtree.nw -c $truetree | awk 'BEGIN{FS="\t"}{if ($7>1){print $4 " " $9}}' > comp_iqtree.txt
 	     paste comp_rbs.txt comp_sbs.txt comp_alrt.txt comp_iqtree.txt | awk '{print $1 " " $3 " " $5 " " $7 " " $8}' >> comp.txt
-    do
+    done
 done
