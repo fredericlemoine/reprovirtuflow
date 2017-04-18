@@ -8,7 +8,7 @@ gotree divide -i true_500.nw -o true_500/true_500
 gotree divide -i true_200.nw -o true_200/true_200
 gotree divide -i true_100.nw -o true_100/true_100
 
-seed=0
+seed=4
 for t in `ls true_500/true_500_*.nw`
 do
     seq-gen -q -op -a0.5 -g4 -mGTR -l1000 -r 3 5 7 4 6 2 -f 0.25 0.15 0.2 0.4 -z $seed ${t} -n 1 > ${t}.ph
