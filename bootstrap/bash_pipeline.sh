@@ -1,6 +1,6 @@
-gotree generate yuletree -l 500 -n 200 > true_500.nw
-gotree generate yuletree -l 200 -n 200 > true_200.nw
-gotree generate yuletree -l 100 -n 200 > true_100.nw
+gotree generate yuletree -l 500 -n 200 -s 1 > true_500.nw
+gotree generate yuletree -l 200 -n 200 -s 2 > true_200.nw
+gotree generate yuletree -l 100 -n 200 -s 3 > true_100.nw
 
 mkdir true_500 true_200 true_100
 
